@@ -65,259 +65,258 @@
 
 # Project Overview
 
-This project investigates the potential relationship between socio-economic factors—specifically unemployment and poverty rates and incidents of police killings across various U.S. states between 2015 and 2016
+This laboratory project involves a comprehensive security analysis of the **Transport Layer Security (TLS)** protocol across different categories of websites. The primary objective is to identify vulnerabilities related to **outdated protocol versions**, **weak cipher suites**, and known **SSL/TLS attacks** using both web-based and locally installed scanning tools.
 
 ---
 
 ## Table of Contents
 
-| Section | Folder | Description |
-|------:|--------|-------------|
-| 1 | `assign/` | Assignment material for the Business Data & Management course |
-| 1.1 | `assign/Assignment-BDMGMT-Apr24.pdf` | Assignment description in English |
-| 1.2 | `assign/Εργασία-ΔΧΜΚ-Απρ24.pdf` | Assignment description in Greek |
-| 2 | `docs/` | Documentation and reports on US police killings |
-| 2.1 | `docs/Police-Killings-US.pdf` | English report |
-| 2.2 | `docs/Δολοφονίες-Αστυνομικών-ΗΠΑ.pdf` | Greek report |
-| 3 | `graphs/` | Visualizations and charts of datasets |
-| 3.1 | `graphs/2015-*.png` | Various 2015 charts: elbow method, optimal clusters, percentages, logs |
-| 3.2 | `graphs/2016-*.png` | Various 2016 charts: elbow method, optimal clusters, percentages, logs |
-| 3.3 | `graphs/avg-*.png` | Average charts across years |
-| 3.4 | `graphs/Clustering3-*.png` | Charts for 3-dataset clustering experiments |
-| 4 | `src/` | Source code, datasets, and notebooks |
-| 4.1 | `src/datasets/` | Raw datasets in CSV and JSON formats |
-| 4.2 | `src/jupyter/` | Jupyter notebooks for analysis and preprocessing |
-| 4.3 | `src/processed_datasets/` | Cleaned and processed datasets |
-| 4.4 | `src/python/` | Python scripts for clustering and preprocessing |
-| 5 | `README.md` | Repository overview, instructions, and summary |
-
-## Project Overview
-
-The research explores whether states with higher levels of unemployment and poverty also exhibit higher frequencies of police brutality. By grouping data into clusters, the study seeks to identify patterns and correlations that can inform social policy and crime understanding.
+| Section | Path / File | Description |
+|--------:|-------------|-------------|
+| 1 | `assign/` | Official laboratory exercise specifications |
+| 1.1 | `assign/Excercise 5 (TLS Scanning)_2023.pdf` | Assignment description (English) |
+| 1.2 | `assign/Άσκηση 5 (TLS Scanning)_2023.pdf` | Assignment description (Greek) |
+| 2 | `docs/` | Technical analysis and TLS security documentation |
+| 2.1 | `docs/TLS-Scanning.pdf` | TLS scanning report and results (English) |
+| 2.2 | `docs/Σάρωση-TLS.pdf` | TLS scanning report and results (Greek) |
+| 3 | `screens/` | TLS scan outputs, certificate analysis, and vulnerability evidence |
+| 3.1 | `screens/*Home.png` | Target website home pages before scanning |
+| 3.2 | `screens/Scan-Python-*.png` | TLS scans executed via Python scripts |
+| 3.3 | `screens/Run-Python-Script-*.png` | Execution of custom TLS scanning scripts |
+| 3.4 | `screens/SSL-Report-*.png` | SSL/TLS report summaries per target |
+| 3.5 | `screens/Certificates*.png` | Certificate type and key analysis (RSA / EC) |
+| 3.6 | `screens/Forum-*.png` | Detected TLS weaknesses and misconfigurations |
+| 4 | `README.md` | Repository overview and experiment description |
 
 ---
 
-## Key Objectives
+## Laboratory Environment
+The security assessments were conducted in the following environment:
 
-- **Correlation Analysis**  
-  Investigating whether unemployment rates correlate with homicide incidents.
-
-- **Pattern Detection**  
-  Using clustering techniques to observe geographical and economic patterns in police killings.
-
-- **Policy Support**  
-  Providing data-driven insights for sociologists, economists, and policymakers to address social issues.
+- **Operating System:** Ubuntu 16.04 (Linux Virtual Machine)
+- **Python Version:** Python 2 (required for the A2SV tool)
 
 ---
 
-## Datasets
+## Tools Used
+Two main tools were utilized for TLS vulnerability scanning:
 
-The analysis utilizes three primary datasets sourced from platforms such as **Kaggle** and **Opendatasoft**:
+- **Qualys SSL Labs (Web Tool):**  
+  Performs in-depth analysis of public SSL/TLS server configurations, including certificate chains, protocol support, and cipher suites.
 
-- **Police Killings Dataset**  
-  Includes data on victims (age, sex, race), location (state/city), cause of death, and whether body cameras were used.
-
-- **Unemployment / Poverty Dataset**  
-  Contains poverty rates and absolute numbers of unemployed individuals per state.
-
-- **US City Populations Dataset**  
-  Experimental data for cities with more than 65,000 inhabitants, used to normalize results against total state populations.
+- **A2SV (Auto Scanning to SSL Vulnerability):**  
+  A Python-based local scanning tool designed to detect common SSL/TLS vulnerabilities such as **HeartBleed**, **CRIME**, **DROWN**, and **POODLE**.
 
 ---
 
-## Methodology
+## Target Websites
+The analysis was performed on four different categories of websites:
 
-The team employed **Cluster Analysis** using the **K-Means algorithm**. This method was chosen for its efficiency with relatively small datasets (51 entries) and its ability to detect hidden patterns without requiring pre-labeled data.
-
----
-
-## Data Preprocessing
-
-- **Time Alignment**  
-  Data was pruned to include only the years **2015 and 2016** to ensure a common temporal scale.
-
-- **Morphology Normalization**  
-  State names were standardized to abbreviations (e.g., *New York → NY*) to enable successful dataset joining.
-
-- **Normalization**  
-  Logarithmic normalization and standard deviation scaling were applied to account for significant differences in population size between states.
-
-- **Handling Data Gaps**  
-  States with zero recorded murders (e.g., *Rhode Island in 2015*) were manually assigned a value of `0` rather than being omitted.
+- **Online Store:** https://www.e-shop.gr/
+- **News Website:** https://www.newsbomb.gr/
+- **University Website:** https://www.hua.gr/
+- **Suspicious Website:** https://www.blackboxresale.com/
 
 ---
 
-## Evaluation Metrics
+## Vulnerabilities Assessed
+The scanners evaluated the presence of the following critical TLS/SSL vulnerabilities:
 
-To assess cluster quality, the following non-predictive evaluation metrics were used:
-
-- **SSE (Sum of Squared Error)**  
-  Measures the deviation of actual values from cluster centroids, indicating how close data points are within clusters.
-
-- **Silhouette Coefficient**  
-  Measures how well data points are separated between clusters; values closer to `1` indicate better clustering.
-
----
-
-## Experimental Results
-
-The analysis was conducted in **four distinct stages**, progressing from percentage-based metrics to log-normalized absolute values to improve accuracy.
-
-| Analysis Stage       | Metric      | Year 2015 | Year 2016 |
-|----------------------|-------------|-----------|-----------|
-| Percentage Rates     | SSE         | 25,464    | 29,151    |
-|                      | Silhouette  | 0.518     | 0.495     |
-| Net Numbers          | SSE         | 18,885    | 19,478    |
-|                      | Silhouette  | 0.481     | 0.484     |
-| Log Normalized       | SSE         | 22,391    | —         |
-|                      | Silhouette  | 0.554     | —         |
+- **CRIME & BREACH:** Compression-based attacks that can leak sensitive data.
+- **HeartBleed:** A severe vulnerability in the OpenSSL library allowing memory disclosure.
+- **POODLE:** An attack exploiting fallback mechanisms to SSL 3.0.
+- **Weak Cipher Suites:** Detection of insecure algorithms such as RC4.
+- **Protocol Support:** Verification of continued support for deprecated TLS versions (TLS 1.0 and 1.1).
 
 ---
 
+## How to Run the Local Scanner (A2SV)
 
-## Technologies Used
+To perform a TLS vulnerability scan using the A2SV tool:
 
-- **Programming Language:** Python 3  
-- **Data Analysis & Machine Learning:**  
-  - K-Means Clustering (Unsupervised Learning)  
-  - Z-score Normalization  
-  - Logarithmic Normalization  
-- **Big Data & Statistical Concepts:**  
-  - Cluster Analysis  
-  - Socio-economic Data Correlation  
-  - Population Normalization Factors  
-- **Data Structures:**  
-  - Pandas DataFrames  
-  - NumPy Arrays  
-- **Libraries & Frameworks:**  
-  - `pandas` (data loading, preprocessing, merging)  
-  - `numpy` (numerical operations, transformations)  
-  - `scikit-learn` (KMeans, Silhouette Coefficient, SSE)  
-  - `scipy` (`zscore` normalization)  
-  - `matplotlib` (data visualization)  
-  - `json` (US states name mapping)  
-  - `os` (console handling)  
-- **Development Environment:**  
-  - Python scripts (`.py`)  
-  - Jupyter Notebooks (`.ipynb`)  
+1. Navigate to the tool’s directory:
+   ```bash
+   cd a2sv
+   ```
+2. Execute the scan against a target IP address:
+    ```bash
+    python2 a2sv.py -t [Target_IP_Address]
+    ```
 
 ---
 
-# Installation & Run Guide
+## Key Findings
+#### Protocol Support:
+Several tested websites were limited to a “B” security grade due to continued support for TLS 1.0 and TLS 1.1, which are considered deprecated and vulnerable compared to TLS 1.3.
+
+### Tool Comparison:
+Both scanning tools generally agreed on the detected vulnerabilities.
+- Qualys SSL Labs provided more extensive details on certificates and server configuration.
+- A2SV focused primarily on identifying specific exploit vectors and known TLS/SSL attacks.
+
+---
+
+## Conclusion
+This laboratory exercise demonstrates the importance of regularly auditing SSL/TLS configurations. Even well-known and widely used websites may expose unnecessary risk by supporting outdated protocols or weak cipher suites. Combining web-based and local scanning tools offers a more complete and reliable TLS security assessment.  
+
+---
+
+# Installation & Setup Guide
+
+This guide describes how to prepare the laboratory environment and install the required tools for conducting TLS/SSL vulnerability scanning as part of the TLS Scanning laboratory exercise.
 
 ## Prerequisites
+### 1. Host System Requirements
+- Host OS: Windows / Linux / macOS
+- Virtualization Software:
+  - Oracle VirtualBox (recommended)
+- Minimum Hardware:
+  - 4 GB RAM (8 GB recommended)
+  - CPU with virtualization support enabled
+  - ~10 GB free disk space
 
-This project requires **Python 3** to be installed on your system.
+### 2. Virtual Machine Environment
+All experiments are conducted inside a Linux virtual machine.
+- Operating System: Ubuntu 16.04 LTS
+- Architecture: 32-bit or 64-bit
+- Purpose: Execution of local TLS scanning tools (A2SV) and Python scripts
 
-Verify your Python installation by running:
+> Important: Ubuntu 16.04 is required due to compatibility with Python 2, which is mandatory for the A2SV scanner.
+
+---
+
+## Virtual Machine Setup
+### Step 1: Create or Import Ubuntu 16.04 VM
+Create a new VirtualBox virtual machine or import an existing Ubuntu 16.04 image.
+Recommended settings:
+- RAM: ≥ 2048 MB
+- CPU: ≥ 1 core
+
+Complete the Ubuntu 16.04 installation.
+
+### Step 2: Update System Packages
+After logging into the VM:
 ```bash
-python --version
+sudo apt update
+sudo apt upgrade
 ```
-or
+
+---
+
+## Software Installation
+### Step 3: Install Python 2 (Required)
+Ubuntu 16.04 includes Python 2 by default, but verify installation:
 ```bash
-python3 --version
+python2 --version
 ```
-If Python is not installed, download it from:
-
-https://www.python.org/downloads/
-
-Additionally, install the required Python libraries:
-
+If not installed:
 ```bash
-pip install pandas numpy scikit-learn scipy matplotlib
+sudo apt install python
 ```
 
-## Installation
-Clone the repository to your local machine:
-
+### Step 4: Install Required Python Libraries
+Some TLS scanning scripts require additional Python modules:
 ```bash
-git clone https://github.com/Big-Data-Management-aka-Uniwa/US-Police-Killing-Search.git
+sudo apt install python-openssl python-requests
 ```
 
-Navigate to the project directory:
+### Step 5: Install Git
 ```bash
-cd US-Police-Killing-Search/src/python
+sudo apt install git
 ```
-
-Ensure the following folder structure exists:
-
-```
-datasets/
-processed_datasets/
-```
-
-## Data Preprocessing
-Before running the clustering experiments, preprocess the raw datasets:
-
+Verify:
 ```bash
-python preprocessData.py
+git --version
 ```
 
-This step:
-- Filters police killing and poverty data for 2015–2016
-- Normalizes U.S. state names to two-letter abbreviations
-- Computes population statistics
-- Produces cleaned datasets in processed_datasets/
-- Generates average datasets for 2015–2016
+---
 
-### Run Clustering (2 Datasets)
-Execute clustering using Police Killings & Poverty datasets:
-
+## Repository Setup
+### Step 6: Clone the Repository
 ```bash
-python Clustering_2_Datasets.py
+git clone https://github.com/Information-Technology-Security/TLS-Scanning.git
+cd TLS-Scanning
 ```
-You will be prompted to select:
-- Year (2015 / 2016 / Average)
-- Data representation (rates, absolute numbers, logarithmic normalization)
-- Number of clusters (k)
 
-The program outputs:
-- Cluster visualizations
-- SSE (Sum of Squared Errors)
-- Silhouette Coefficient
-- Elbow Method plot for optimal k
+---
 
-## Run Clustering (3 Datasets)
-Execute clustering with Police Killings, Poverty, and Population normalization:
-
+## A2SV Tool Setup
+### Step 7: Navigate to A2SV Directory
 ```bash
-python Clustering_3_Datasets.py
+cd a2sv
 ```
-This version:
-- Normalizes killings and poverty by total state population
-- Performs K-Means clustering
-- Visualizes clusters and centroids
-- Reports SSE and Silhouette metrics
-
-## Jupyter Notebook Support
-All source files are also implemented as Jupyter Notebooks (.ipynb), allowing:
-- Interactive execution
-- Step-by-step analysis
-- Inline visualizations
-
-Launch Jupyter Notebook with:
+Ensure the main script exists:
 ```bash
-jupyter notebook
+ls
 ```
-
-Then open the corresponding .ipynb files by navigating to project directory
-
-Navigate to the project directory:
+Expected output includes:
 ```bash
-cd US-Police-Killing-Search/src/jupyter
+a2sv.py
 ```
 
-## Output
-- Cluster scatter plots with centroids
-- Quantitative clustering metrics (SSE, Silhouette Coefficient)
-- CSV files containing processed and merged datasets
+---
 
-The analysis terminates after all clusters and evaluation metrics are displayed.
+## Supporting Python files
+### Step 8: Verify Script Permissions
+```bash
+chmod +x a2sv.py
+```
+
+---
+
+## Running the TLS Scanner
+### Step 9: Execute a TLS Vulnerability Scan
+Run the A2SV scanner against a target IP address:
+```bash
+python2 a2sv.py -t <TARGET_IP_ADDRESS>
+```
+Example:
+```bash
+python2 a2sv.py -t 8.8.8.8
+```
+The scanner will test for:
+```bash
+HeartBleed
+CRIME
+POODLE
+DROWN
+Weak cipher suites
+Deprecated TLS versions
+```
+
+---
+
+## Web-Based Scanning Tool (Optional)
+In parallel with local scans, TLS configurations are analyzed using:
+- Qualys SSL Labs: https://www.ssllabs.com/ssltest/
+
+This tool is used for:
+- Certificate chain analysis
+- Cipher suite evaluation
+- Protocol version grading
+- No local installation is required.
+
+---
+
+## Ready-to-Use Environment
+At this point, the system is fully configured for:
+- Local TLS/SSL vulnerability scanning using A2SV
+- Comparative analysis with Qualys SSL Labs
+- Collection of screenshots and reports for documentation
+- Proceed with the scanning experiments described in the Laboratory Exercise.
+
+---
+
+## Notes & Troubleshooting
+- Always use Python 2, not Python 3.
+- Some websites block aggressive scanning; results may vary.
+- Prefer scanning IP addresses instead of domain names when using A2SV.
+- Ubuntu 16.04 is deprecated but required for legacy tool compatibility.
 
 ---
 
 ## Open the Documentation
 1. Navigate to the `docs/` directory
 2. Open the report corresponding to your preferred language:
-    - English: `Police-Killings-US.pdf`
-    - Greek: `Δολοφονίες-Αστυνομικών-ΗΠΑ.pdf`
+    - English: `TLS-Scanning.pdf`
+    - Greek: `Σάρωση-TLS.pdf`
